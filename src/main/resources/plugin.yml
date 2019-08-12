@@ -1,0 +1,13 @@
+name: HoloDrops
+version: ${project.version}
+main: me.fsml.holodrops.Main
+api-version: 1.13
+authors: [fsml]
+description: Shows the item's name above it when dropped
+website: https://www.spigotmc.org/members/fsml.247556/
+commands:
+  hdreload:
+    usage: /<command>
+    description: reloads the config
+    permission: holodrops.reload
+    aliases: [hdr]
