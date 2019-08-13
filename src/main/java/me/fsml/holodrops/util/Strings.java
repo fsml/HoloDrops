@@ -22,21 +22,27 @@ public class Strings {
     public static String makeName(Item drop, int count) {
         String formatted = Main.m.settings.getFormat().toUpperCase();
         String itemName = "";
-        
-        ItemMeta meta = drop.getItemStack().getItemMeta();
-        if (meta.hasDisplayName() || Main.m.settings.getCustomNamesOnly()) {
-            String name = meta.getDisplayName();
-            if (!Main.m.settings.isBlacklisted(name)) {
-                itemName = name;
-            }
-        } else {
-            itemName = Main.m.settings.getNameFromMat(drop.getItemStack().getType().name());
+        itemName = makeItemName(drop);
+        if (Main.m.settings.isBlacklisted(itemName)) {
+            itemName = "";
         }
-        
         formatted = rePlaceholders(formatted, itemName, count);
         
         return itemName.length() == 0 ? itemName : formatted;
         
+    }
+    
+    public static String makeItemName(Item drop) {
+        String itemName = "";
+        
+        ItemMeta meta = drop.getItemStack().getItemMeta();
+        if (meta.hasDisplayName() || Main.m.settings.getCustomNamesOnly()) {
+            itemName = meta.getDisplayName();
+        } else {
+            itemName = Main.m.settings.getNameFromMat(drop.getItemStack().getType().name());
+        }
+        
+        return itemName;
     }
     
     private static String rePlaceholders(String formatted, String item, int count) {

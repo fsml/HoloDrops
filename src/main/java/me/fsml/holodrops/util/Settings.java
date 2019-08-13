@@ -24,6 +24,8 @@ public class Settings {
         settings.put("item-frame-holos", ConfigReader.getBoolean("item-frame-holos"));
         settings.put("custom-names-only", ConfigReader.getBoolean("custom-names-only"));
         settings.put("single-stack", ConfigReader.getBoolean("single-stack"));
+        settings.put("item-glow", ConfigReader.getBoolean("item-glow"));
+        settings.put("glow-color", ConfigReader.getBoolean("glow-color"));
         
         format.put("stack-count", Strings.color(ConfigReader.getString("stack-count")));
         format.put("holo-prefix", Strings.color(ConfigReader.getString("holo-prefix")));
@@ -46,6 +48,14 @@ public class Settings {
     
     public boolean getSingleStack() {
         return settings.get("single-stack");
+    }
+    
+    public boolean getItemGlow() {
+        return settings.get("item-glow");
+    }
+    
+    public boolean getGlowColor() {
+        return settings.get("glow-color");
     }
     
     public String getStackFormat() {

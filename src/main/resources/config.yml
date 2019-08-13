@@ -28,6 +28,11 @@ custom-names-only: false
 # show stack count of 1 on the item name
 single-stack: false
 
+# item-glow shows items through walls and in dark areas
+# glow-color turns the glowing items different colors based on the last color found in the name
+item-glow: false
+glow-color: true
+
 # put names here that you never want to see
 blacklist:
   - ShopItem

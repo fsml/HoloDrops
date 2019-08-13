@@ -1,7 +1,6 @@
 package me.fsml.holodrops.util;
 
 import me.fsml.holodrops.Main;
-
 import java.util.List;
 
 public class ConfigReader {
@@ -17,6 +16,5 @@ public class ConfigReader {
     public static List<String> getStringList(String option) {
         return Main.m.getConfig().getStringList(option);
     }
-    
     
 }
