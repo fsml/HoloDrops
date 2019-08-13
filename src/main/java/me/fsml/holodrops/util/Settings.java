@@ -7,19 +7,23 @@ import java.util.List;
 
 public class Settings {
     
-    private HashMap<String, Boolean> settings;
-    private HashMap<String, String> format;
-    private HashMap<String, String> names;
+    private HashMap<String, Boolean> settings = new HashMap<String, Boolean>();
+    private HashMap<String, String> format = new HashMap<String, String>();
+    private HashMap<String, String> names = new HashMap<String, String>();
     private List<String> enabledWorlds;
+    private List<String> blacklist;
     
     public void initialize() {
-        settings = new HashMap<String, Boolean>();
-        format = new HashMap<String, String>();
-        names = new HashMap<String, String>();
+        Main.m.reloadConfig();
+        settings.clear();
+        format.clear();
+        names.clear();
         enabledWorlds = ConfigReader.getStringList("enabled-worlds");
+        blacklist = ConfigReader.getStringList("blacklist");
         
         settings.put("item-frame-holos", ConfigReader.getBoolean("item-frame-holos"));
         settings.put("custom-names-only", ConfigReader.getBoolean("custom-names-only"));
+        settings.put("single-stack", ConfigReader.getBoolean("single-stack"));
         
         format.put("stack-count", Strings.color(ConfigReader.getString("stack-count")));
         format.put("holo-prefix", Strings.color(ConfigReader.getString("holo-prefix")));
@@ -40,6 +44,10 @@ public class Settings {
         return settings.get("custom-names-only");
     }
     
+    public boolean getSingleStack() {
+        return settings.get("single-stack");
+    }
+    
     public String getStackFormat() {
         return format.get("stack-count");
     }
@@ -58,6 +66,14 @@ public class Settings {
     
     public boolean isWorldEnabled(String world) {
         return enabledWorlds.contains(world);
+    }
+    
+    public boolean isBlacklisted(String name) {
+        for (String s : blacklist) {
+            if (Strings.stripColor(s).equals(Strings.stripColor(name)))
+                return true;
+        }
+        return false;
     }
     
     public String getNameFromMat(String material) {

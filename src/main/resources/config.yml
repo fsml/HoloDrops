@@ -1,7 +1,7 @@
 # Language and settings file
 
 # Displays amount of items in the stack, set to "" to disable
-stack-count: "&f x%amount%"
+stack-count: "&fx%amount%"
 
 # Prefix that appears on all items
 holo-prefix: "&f"
@@ -11,7 +11,7 @@ holo-suffix: ""
 
 # the order in which all the elements appear to make the name
 # P = prefix, I = item name, C = stack count, S = suffix (formats defined above)
-holo-format: "PICS"
+holo-format: "%P%%I% %C%%S%"
 
 # worlds that items get holograms in
 enabled-worlds:
@@ -24,7 +24,14 @@ item-frame-holos: false
 
 # only show item holos if the item has a custom name
 custom-names-only: false
-  
+
+# show stack count of 1 on the item name
+single-stack: false
+
+# put names here that you never want to see
+blacklist:
+  - ShopItem
+
 # add/remove items or change names here
 item-names:
   ACACIA_BOAT: "Acacia Boat"
