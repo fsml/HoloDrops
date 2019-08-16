@@ -1,10 +1,10 @@
-name: HoloDrops
+name: ${project.name}
 version: ${project.version}
 main: me.fsml.holodrops.Main
 api-version: 1.13
 authors: [fsml]
-description: Shows the item's name above it when dropped
-website: https://www.spigotmc.org/members/fsml.247556/
+description: ${project.description}
+website: ${project.url}
 commands:
   hdreload:
     usage: /<command>
