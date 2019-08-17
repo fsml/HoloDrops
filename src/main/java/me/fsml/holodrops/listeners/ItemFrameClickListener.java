@@ -23,7 +23,7 @@ public class ItemFrameClickListener implements Listener {
             ItemFrame frame = (ItemFrame)e.getRightClicked();
             if (Main.m.settings.isWorldEnabled(frame.getWorld().getName())) {
                 // empty
-                if (frame.getItem().getType() == Material.AIR) {
+                if (frame.getItem().getType() == Material.AIR && p.getItemInHand().getType() != Material.AIR) {
                     // make a new ItemStack to not change the one in hand
                     ItemStack newone = p.getItemInHand().clone();
                     // if it doesnt have a name AND its not on custom names only mode: put a name on it to display

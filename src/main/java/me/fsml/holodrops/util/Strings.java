@@ -2,10 +2,13 @@ package me.fsml.holodrops.util;
 
 import me.fsml.holodrops.Main;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +39,23 @@ public class Strings {
         String itemName = "";
         
         ItemMeta meta = drop.getItemStack().getItemMeta();
-        if (meta.hasDisplayName() || Main.m.settings.getCustomNamesOnly()) {
+        
+        if (drop.getItemStack().getType() == Material.WRITTEN_BOOK) {
+            itemName = bookTitle((BookMeta)meta);
+        }
+        else if (meta.hasDisplayName() || Main.m.settings.getCustomNamesOnly()) {
             itemName = meta.getDisplayName();
         } else {
             itemName = Main.m.settings.getNameFromMat(drop.getItemStack().getType().name());
         }
         
         return itemName;
+    }
+    
+    private static String bookTitle(BookMeta meta) {
+        String title = meta.getTitle() == null ? " " : meta.getTitle();
+        String itemName = ConfigReader.getString("item-names.WRITTEN_BOOK");
+        return itemName.replace("%title%", title);
     }
     
     private static String rePlaceholders(String formatted, String item, int count) {
@@ -67,8 +80,12 @@ public class Strings {
         ItemMeta meta = item.getItemMeta();
         String formatted = Main.m.settings.getFormat().toUpperCase();
         String itemName = "";
-        
-        itemName = Main.m.settings.getNameFromMat(item.getType().name());
+    
+        if (item.getType() == Material.WRITTEN_BOOK) {
+            itemName = bookTitle((BookMeta)meta);
+        } else {
+            itemName = Main.m.settings.getNameFromMat(item.getType().name());
+        }
         formatted = rePlaceholders(formatted, itemName, count);
         
         meta.setDisplayName(itemName.length() == 0 ? itemName : formatted);
