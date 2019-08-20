@@ -981,7 +981,7 @@ item-names:
   WOODEN_SHOVEL: "Wooden Shovel"
   WOODEN_SWORD: "Wooden Sword"
   WRITABLE_BOOK: "Book and Quill"
-  WRITTEN_BOOK: "Written Book"
+  WRITTEN_BOOK: "%title%"
   YELLOW_BANNER: "Yellow Banner"
   YELLOW_BED: "Yellow Bed"
   YELLOW_CARPET: "Yellow Carpet"

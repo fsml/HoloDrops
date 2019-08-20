@@ -8,6 +8,11 @@ website: ${project.url}
 commands:
   hdreload:
     usage: /<command>
-    description: reloads the config
+    description: Reload the config
     permission: holodrops.reload
+    permission-message: "§4§lHoloDrops | §r§cRequired permission: <permission>"
     aliases: [hdr]
+permissions:
+  holodrops.reload:
+    description: Allows the ability to reload the config
+    default: op
