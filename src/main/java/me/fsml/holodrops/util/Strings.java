@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class Strings {
         String formatted = Main.m.settings.getFormat().toUpperCase();
         String itemName = "";
         itemName = makeItemName(drop);
-        if (Main.m.settings.isBlacklisted(itemName)) {
+        if (Main.m.settings.isBlacklisted(itemName) || isUUID(itemName)) {
             itemName = "";
         }
         formatted = rePlaceholders(formatted, itemName, count);
@@ -120,6 +119,10 @@ public class Strings {
             return lore.get(lore.size() - 1).equals("HoloDrops");
         }
         return false;
+    }
+    
+    public static boolean isUUID(String name) {
+        return (stripColor(name).matches("[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"));
     }
     
     
