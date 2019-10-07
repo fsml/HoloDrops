@@ -25,10 +25,14 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ItemFrameClickListener(), this);
         getServer().getPluginManager().registerEvents(new ItemPickupListener(), this);
         getCommand("hdreload").setExecutor(new Reload());
-        
+    
     }
     
     public void onDisable() {
-        Glow.unregister();
+        try {
+            Glow.unregister();
+        } catch (NoClassDefFoundError error) {
+            // no items were set to glow... this try/catch block is to prevent console spam
+        }
     }
 }
