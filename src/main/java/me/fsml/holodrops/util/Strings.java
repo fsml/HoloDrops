@@ -16,6 +16,12 @@ public class Strings {
     public static String color(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
+    public static List<String> colorList(List<String> list) { // color the glowlist
+        for (int x = 0; x < list.size(); x++) {
+            list.set(x, color(list.get(x)));
+        }
+        return list;
+    }
     
     public static String stripColor(String string) {
         return ChatColor.stripColor(string);
@@ -45,7 +51,7 @@ public class Strings {
         else if (meta.hasDisplayName() || Main.m.settings.getCustomNamesOnly()) {
             itemName = meta.getDisplayName();
         } else {
-            itemName = Main.m.settings.getNameFromMat(drop.getItemStack().getType().name());
+            itemName = Main.m.settings.getNameFromMat(drop.getItemStack().getType().toString());
         }
         
         return itemName;
