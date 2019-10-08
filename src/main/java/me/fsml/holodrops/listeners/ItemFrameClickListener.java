@@ -22,7 +22,7 @@ public class ItemFrameClickListener implements Listener {
         if (e.getRightClicked() instanceof ItemFrame && Main.m.settings.getFrames() && e.getHand() == EquipmentSlot.HAND) {
             ItemFrame frame = (ItemFrame)e.getRightClicked();
             if (Main.m.settings.isWorldEnabled(frame.getWorld().getName())) {
-                // empty
+                // empty frame
                 if (frame.getItem().getType() == Material.AIR && p.getItemInHand().getType() != Material.AIR) {
                     // make a new ItemStack to not change the one in hand
                     ItemStack newone = p.getItemInHand().clone();
