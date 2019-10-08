@@ -1,7 +1,11 @@
 # Language and settings file
 
-# Displays amount of items in the stack, set to "" to disable
+### HOLOGRAMS ###
+
+# Displays the %amount% of items in the stack
 stack-count: "&fx%amount%"
+# show stack count of 1 on the item name
+single-stack: false
 
 # Prefix that appears on all items
 holo-prefix: "&f"
@@ -10,34 +14,44 @@ holo-prefix: "&f"
 holo-suffix: ""
 
 # the order in which all the elements appear to make the name
-# P = prefix, I = item name, C = stack count, S = suffix (formats defined above)
+# P = prefix, I = item name, C = stack count, S = suffix
 holo-format: "%P%%I% %C%%S%"
 
-# worlds that items get holograms in
+### WORLDS ###
+
+# worlds where item drops get holos
 enabled-worlds:
-  - world
-  - world_nether
-  - world_the_end
-  
-# enable to make item names appear in item frames (named items show up by default from vanilla)
+  - "world"
+  - "world_nether"
+  - "world_the_end"
+
+### MISC ###
+
+# enable to make default item names also appear in item frames (renamed items show up by default from vanilla)
 item-frame-holos: false
 
 # only show item holos if the item has a custom name
 custom-names-only: false
 
-# show stack count of 1 on the item name
-single-stack: false
+# put custom names here that you never want to see, NOT color sensitive, unlike glowlist
+blacklist:
+  - "ShopItem"
+
+### GLOW ###
 
 # item-glow shows items through walls and in dark areas
-# glow-color turns the glowing items different colors based on the last color found in the name
 item-glow: false
+# glow-color changes the color items glow in, currently uses the last color seen in the item name
+# putting a color code at the end of an item name below is a good use of this system
 glow-color: true
+# only the names listed here will glow, it's a glow whitelist. if blank then all items glow
+# this IS color sensitive, so "&4Sword" =/= "&fSword", unlike the blacklist
+glowlist:
+  #- "&4Diamond Sword"
 
-# put names here that you never want to see
-blacklist:
-  - ShopItem
+### NAMES ###
 
-# add/remove items or change names here
+# add/remove/edit items & names here (some of these you cant get as drops, it's just auto generated)
 item-names:
   ACACIA_BOAT: "Acacia Boat"
   ACACIA_BUTTON: "Acacia Button"
