@@ -12,6 +12,7 @@ public class Settings {
     private HashMap<String, String> names = new HashMap<String, String>();
     private List<String> enabledWorlds;
     private List<String> blacklist;
+    private List<String> glowlist;
     
     public void initialize() {
         Main.m.reloadConfig();
@@ -20,6 +21,7 @@ public class Settings {
         names.clear();
         enabledWorlds = ConfigReader.getStringList("enabled-worlds");
         blacklist = ConfigReader.getStringList("blacklist");
+        glowlist = Strings.colorList(ConfigReader.getStringList("glowlist"));
         
         settings.put("item-frame-holos", ConfigReader.getBoolean("item-frame-holos"));
         settings.put("custom-names-only", ConfigReader.getBoolean("custom-names-only"));
@@ -84,6 +86,15 @@ public class Settings {
                 return true;
         }
         return false;
+    }
+    
+    public boolean isGlowlisted(String name) {
+        if (glowlist.isEmpty()) { // all items are allowed if empty
+            return true;
+        } else {
+            return glowlist.contains(name); // color sensitive, so different way to check than the blacklist
+        }
+        // return glowlist.isEmpty() ? true : glowlist.contains(name);
     }
     
     public String getNameFromMat(String material) {
