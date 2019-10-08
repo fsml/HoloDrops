@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemDropListener implements Listener {
     
-   
     
     @EventHandler
     public void itemDrop(ItemSpawnEvent e) {
@@ -30,10 +29,12 @@ public class ItemDropListener implements Listener {
             drop.setCustomNameVisible(true);
             
             if (Main.m.settings.getItemGlow()) {
-                drop.setGlowing(true);
-                if (Main.m.settings.getGlowColor()) {
-                    ChatColor color = Glow.getColor(Strings.makeItemName(drop));
-                    Glow.setGlowColor(color, drop);
+                if (Main.m.settings.isGlowlisted(Strings.makeItemName(drop))) { // check the raw name
+                    drop.setGlowing(true);
+                    if (Main.m.settings.getGlowColor()) {
+                        ChatColor color = Glow.getColor(Strings.makeItemName(drop));
+                        Glow.setGlowColor(color, drop);
+                    }
                 }
             }
         }
