@@ -2,19 +2,17 @@
 
 ### HOLOGRAMS ###
 
-# Displays the %amount% of items in the stack
+# displays the %amount% of items in the stack
 stack-count: "&fx%amount%"
 # show stack count of 1 on the item name
 single-stack: false
-
-# Prefix that appears on all items
+# prefix that appears on all items
 holo-prefix: "&f"
-
-# Suffix that appears on all items
+# suffix that appears on all items
 holo-suffix: ""
-
 # the order in which all the elements appear to make the name
 # P = prefix, I = item name, C = stack count, S = suffix
+# you can also directly edit this instead of changing the formats above
 holo-format: "%P%%I% %C%%S%"
 
 ### WORLDS ###
@@ -45,13 +43,30 @@ item-glow: false
 # putting a color code at the end of an item name below is a good use of this system
 glow-color: true
 # only the names listed here will glow, it's a glow whitelist. if blank then all items glow
-# this IS color sensitive, so "&4Sword" =/= "&fSword", unlike the blacklist
+# this IS color sensitive, unlike the blacklist
 glowlist:
   #- "&4Diamond Sword"
 
+### DROP PROTECTION ###
+
+# drops will be protected and only the player who created the drop can pick it up
+drop-protection: false
+# seconds before a drop becomes available to everyone else. set to 0 for unlimited protection
+protection-time: 60
+# format to show that an item has protection. right now it is forced to go before holo-format
+protection-format: "&b&l%TIME%s &f%PLAYER%'s "
+# list of items that will be protected. leave blank for all drops.
+protection-item-list:
+  #- DIAMOND
+# how a dropped item gets protection. currently limited to block drops
+protection-sources:
+  block-drops: true
+
+
+
 ### NAMES ###
 
-# add/remove/edit items & names here (some of these you cant get as drops, it's just auto generated)
+# add/remove/edit items & names here (some of these you cant get as drops, fyi)
 item-names:
   ACACIA_BOAT: "Acacia Boat"
   ACACIA_BUTTON: "Acacia Button"
