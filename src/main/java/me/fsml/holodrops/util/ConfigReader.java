@@ -17,4 +17,8 @@ public class ConfigReader {
         return Main.m.getConfig().getStringList(option);
     }
     
+    public static int getInt(String option) {
+        return Main.m.getConfig().getInt(option);
+    }
+    
 }
