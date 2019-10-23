@@ -27,14 +27,14 @@ public class Strings {
         return ChatColor.stripColor(string);
     }
     
-    public static String makeName(Item drop, int count) {
-        String formatted = Main.m.settings.getFormat().toUpperCase();
+    public static String makeName(Item drop, int count, String playerName, int time) {
+        String formatted = !playerName.equals("") ? Main.m.settings.getProtFormat() + Main.m.settings.getFormat() : Main.m.settings.getFormat();
         String itemName = "";
         itemName = makeItemName(drop);
         if (Main.m.settings.isBlacklisted(itemName) || isUUID(itemName)) {
             itemName = "";
         }
-        formatted = rePlaceholders(formatted, itemName, count);
+        formatted = rePlaceholders(formatted, itemName, count, playerName, time);
         
         return itemName.length() == 0 ? itemName : formatted;
         
@@ -63,21 +63,34 @@ public class Strings {
         return itemName.replace("%title%", title);
     }
     
-    private static String rePlaceholders(String formatted, String item, int count) {
-        formatted = formatted.replace("%P%", Main.m.settings.getPrefix())
-                .replace("%I%", item)
-                .replace("%S%", Main.m.settings.getSuffix());
+    private static String rePlaceholders(String formatted, String item, int count, String playerName, int time) {
+        formatted = replaceAndFixSpacing(formatted, "%P%", Main.m.settings.getPrefix());
+        formatted = replaceAndFixSpacing(formatted, "%I%", item);
+        formatted = replaceAndFixSpacing(formatted, "%S%", Main.m.settings.getSuffix());
+        formatted = replaceAndFixSpacing(formatted, "%PLAYER%", playerName);
+        formatted = replaceAndFixSpacing(formatted, "%TIME%", time != 0 ? time + "" : "");
         // single stacks
         // count != 0 is for item frames (never display the stack count)
         if (count != 0 && count != 1 || Main.m.settings.getSingleStack()) {
-            formatted = formatted.replace("%C%", Main.m.settings.getStackFormat().replace("%amount%", "" + count));
+            formatted = formatted.replace("%C%", Main.m.settings.getStackFormat().toLowerCase().replace("%amount%", "" + count));
         } else {
-            // remove a the space at the end
-            formatted = formatted.replace(" %C%", "");
-            // in case there was no space
-            formatted = formatted.replace("%C%", "");
+            formatted = replaceAndFixSpacing(formatted, "%C%", "");
+            
         }
         return formatted;
+    }
+    
+    private static String replaceAndFixSpacing(String string, String replace, String replacement) {
+        // remove spaces that would have made sense if the placeholder was there
+        // %PLAYER% %ITEM%, no player would make it " %ITEM%" or " DIRT"
+        //                                           ^
+        if (replacement.equals("")) {
+            return string = string.replace(" " + replace + " ", "")
+                    .replace(" " + replace, "")
+                    .replace(replace + " ", "")
+                    .replace(replace, "");
+        }
+        return string.replace(replace, replacement);
     }
     
     // count is supplied to make a call to rePlaceholders
@@ -91,7 +104,7 @@ public class Strings {
         } else {
             itemName = Main.m.settings.getNameFromMat(item.getType().name());
         }
-        formatted = rePlaceholders(formatted, itemName, count);
+        formatted = rePlaceholders(formatted, itemName, count, "", 0);
         
         meta.setDisplayName(itemName.length() == 0 ? itemName : formatted);
         item.setItemMeta(meta);
