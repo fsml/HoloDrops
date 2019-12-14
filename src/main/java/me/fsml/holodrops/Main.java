@@ -1,5 +1,6 @@
 package me.fsml.holodrops;
 
+import me.fsml.holodrops.commands.Check;
 import me.fsml.holodrops.commands.Reload;
 import me.fsml.holodrops.listeners.ItemDropListener;
 import me.fsml.holodrops.listeners.ItemFrameClickListener;
@@ -27,6 +28,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ItemPickupListener(), this);
         getServer().getPluginManager().registerEvents(new BlockDropListener(), this);
         getCommand("hdreload").setExecutor(new Reload());
+        getCommand("hdcheck").setExecutor(new Check());
     
     }
     
@@ -34,7 +36,7 @@ public final class Main extends JavaPlugin {
         try {
             Glow.unregister();
         } catch (NoClassDefFoundError error) {
-            // no items were set to glow... this try/catch block is to prevent console spam
+            // this try/catch block is to prevent console spam
         }
         settings.fixNames();
     }
