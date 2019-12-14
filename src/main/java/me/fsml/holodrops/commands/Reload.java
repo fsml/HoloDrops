@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 
 public class Reload implements CommandExecutor {
     
-    private String prefix = "" + ChatColor.DARK_RED + ChatColor.BOLD + "HoloDrops | ";
+    private String prefix = "" + ChatColor.DARK_RED + ChatColor.BOLD + "HoloDrops ";
     
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         reload(sender);
