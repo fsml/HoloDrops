@@ -10,9 +10,18 @@ commands:
     usage: /<command>
     description: Reload the config
     permission: holodrops.reload
-    permission-message: "§4§lHoloDrops | §r§cRequired permission: <permission>"
+    permission-message: "§4§lHoloDrops §r§cRequired permission: <permission>"
     aliases: [hdr]
+  hdcheck:
+    usage: /<command>
+    description: Check for missing items in the config
+    permission: holodrops.check
+    permission-message: "§4§lHoloDrops §r§cRequired permission: <permission>"
+    aliases: [hdc]
 permissions:
   holodrops.reload:
     description: Allows the ability to reload the config
+    default: op
+  holodrops.check:
+    description: Check for missing items in the config
     default: op
