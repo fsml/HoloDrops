@@ -4,6 +4,7 @@ import me.fsml.holodrops.Main;
 import me.fsml.holodrops.util.Glow;
 import me.fsml.holodrops.util.Strings;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +19,9 @@ public class ItemDropListener implements Listener {
     @EventHandler
     public void itemDrop(ItemSpawnEvent e) {
         Item drop = e.getEntity();
+        if(drop.getItemStack().getType() == Material.AIR){
+            return;
+        }
         if (Main.m.settings.isWorldEnabled(drop.getWorld().getName())) {
             ItemStack item = drop.getItemStack();
             if (item.hasItemMeta()) {
