@@ -44,11 +44,10 @@ public class Strings {
         String itemName = "";
         
         ItemMeta meta = drop.getItemStack().getItemMeta();
-        
         if (drop.getItemStack().getType() == Material.WRITTEN_BOOK) {
             itemName = bookTitle((BookMeta)meta);
         }
-        else if (meta.hasDisplayName() || Main.m.settings.getCustomNamesOnly()) {
+        else if (meta != null && (meta.hasDisplayName() || Main.m.settings.getCustomNamesOnly())) {
             itemName = meta.getDisplayName();
         } else {
             itemName = Main.m.settings.getNameFromMat(drop.getItemStack().getType().toString());
